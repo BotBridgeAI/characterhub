@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Site at Capacity</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <script>
+    </script>
+  <div class="logo-container">
+    <img src="../images/logotransparent.png" alt="Logo" class="logo">
+  </div>
+  
+  <div class="loader">
+    <div class="circle one"></div>
+    <div class="circle two"></div>
+    <div class="circle three"></div>
+  </div>
+
+  <div class="message">
+    <h1>Oops! Our site is at full capacity!</h1>
+    <p2><b>We’ve got a bit of a crowd, but don’t worry!</b>
+    <br>Number of users waiting: <span id="waitingCount">0</span><br>
+    Estimated wait time: <span id="waitTime">0</span> minutes</p2>
+    <p>We’ll get you in soon!
+    <br>In the meantime, have a laugh 😅 </p>
+  </div>
+
+  <!-- Bot Image Container -->
+  <div class="bot-image-container">
+    <img src="../images/AtCapacityBotTransparent.png" alt="Bot Image" class="botimage">
+    <div class="joke-container">
+      <p class="joke-text">Why do programmers prefer dark mode? Because the light attracts bugs! 💻</p>
+    </div>  
+  </div>
+
+  <script>
+    // joke joke logic
+    const jokeContainer = document.querySelector('.joke-container');
+    const jokeText = document.querySelector('.joke-text');
+    
+    const jokeJokes = [
+      "Why did the computer go to the doctor? It had a virus!",
+      "Why don’t programmers like nature? It has too many bugs.",
+      "I told my computer I needed a break, and now it’s frozen.",
+      "Why do programmers prefer dark mode? Because light attracts bugs!",
+      "What’s a programmer’s favorite hangout place? The Java Café!",
+      "Why did the developer go broke? Because he used up all his cache!",
+      "How do you comfort a JavaScript bug? You console it!",
+      "I would tell you a joke about UDP... but you might not get it.",
+      "Why did the web developer walk out of the restaurant? They couldn’t get the table.",
+      "Why don’t computers ever make mistakes? They have the right logic!",
+      "What did the router say to the computer? 'You’ve got a great connection!'",
+      "Why was the smartphone so good at school? It had all the right apps!",
+      "What’s a robot’s favorite type of music? Heavy metal!",
+      "I’m writing a book on reverse psychology. Don’t buy it!",
+      "Why was the computer cold? It left its Windows open!",
+      "What’s a programmer’s favorite type of tea? C#!",
+      "Why did the developer go outside? He needed some fresh air (but his code kept him inside)!",
+      "Why don’t programmers ever play hide and seek? Because they can’t hide their bugs.",
+      "What’s a hacker’s favorite season? Spring, because of the ‘spring’ in their step!",
+      "Why did the software engineer quit his job? Because he didn’t get arrays.",
+      "What do you call an educated tube? A graduated cylinder."
+];
+
+
+
+    function showjokeJoke() {
+      jokeText.textContent = jokeJokes[Math.floor(Math.random() * jokeJokes.length)];
+      jokeContainer.classList.add('show');
+      
+      setTimeout(() => {
+        jokeContainer.classList.remove('show');
+      }, 12000); // Shows joke for 5 seconds
+    }
+
+    setInterval(showjokeJoke, Math.random() * 4000 + 12500);
+
+    showjokeJoke();
+
+    // Waiting info logic
+    let waitingCount = 0;
+    const waitTimePerPerson = 2; // Estimated time in minutes per person
+
+    function updateWaitingInfo() {
+      fetch('/api/waiting-count')
+        .then(response => response.json())
+        .then(data => {
+          waitingCount = data.waitingCount;
+          document.getElementById('waitingCount').textContent = waitingCount;
+          document.getElementById('waitTime').textContent = Math.ceil(waitingCount * waitTimePerPerson);
+
+          // Check if a slot is available
+          if (waitingCount < 1) {
+            window.location.href = '/'; // Redirect to the main page if a slot is free
+          }
+        })
+        .catch(error => console.error('Error fetching waiting count:', error));
+    }
+
+    // function updateWaitingInfo() {
+    //   waitingCount++;
+    //   document.getElementById('waitingCount').textContent = waitingCount;
+    //   document.getElementById('waitTime').textContent = Math.ceil(waitingCount * waitTimePerPerson);
+    // }
+
+    // Simulate users joining the queue
+    setInterval(updateWaitingInfo, 3000); // Update every 3 seconds
+  </script>
+</body>
+</html>

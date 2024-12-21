@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Account Management - BOTBRIDGE.AI Character Hub</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/menu2.0.css">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #1d1f21; /* Dark background */
+            color: #f5f5f5;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #20232a;
+            padding: 10px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        main {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 0 20px;
+        }
+
+        .container {
+            background-color: #2f3136; /* Dark card background */
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            width: 100%;
+            max-width: 400px; /* Limit width for larger screens */
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        p {
+            margin-top: 20px;
+        }
+
+        footer {
+            background-color: #20232a;
+            padding: 20px;
+            text-align: center;
+        }
+
+        footer p {
+            margin: 0;
+        }
+
+        a {
+            color: #4285f4;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+        .user-status {
+            padding: 15px;
+            margin-top: 20px;
+            border-radius: 5px;
+            text-align: center;
+        }
+        .logged-in {
+            background-color: #e0f7fa;
+            color: #00695c;
+            border: 1px solid #4db6ac;
+        }
+        .logged-out {
+            background-color: #ffebee;
+            color: #c62828;
+            border: 1px solid #ef5350;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <nav class="navbar">
+            <div class="left-content">
+                <a href="/" class="logo"> <!-- Make the logo clickable -->
+                <div class="logo">
+                    <img src="logo.png" alt=" ">
+                </div>
+            </a>
+                        <a href="/" class="text">
+                <div class="text">
+                    <span class="letter letter-1">B</span>
+                    <span class="letter letter-2">O</span>
+                    <span class="letter letter-3">T</span>
+                    <span class="letter letter-4">B</span>
+                    <span class="letter letter-5">R</span>
+                    <span class="letter letter-6">I</span>
+                    <span class="letter letter-7">D</span>
+                    <span class="letter letter-8">G</span>
+                    <span class="letter letter-9">E</span>
+                    <span class="letter letter-10">.</span>
+                    <span class="letter letter-11">A</span>
+                    <span class="letter letter-12">I</span>
+                </div>
+            </a>
+            </div>
+            <div class="right-content">
+                <ul class="nav-links">
+                    <!-- Characters with dropdown -->
+                    <li class="dropdown">
+                        <a href="index.html" class="dropbtn" onclick="toggleDropdown(event)">Characters</a>
+                        <div class="dropdown-content">
+                            <a href="index.html">Characters Hub</a>
+                            <a href="editor.html">Upload Character</a>
+                            <a href="mycharacters.html">My Characters</a>
+                        </div>
+                    </li>
+        
+                    <!-- Community with dropdown -->
+                    <li class="dropdown">
+                        <a href="rules.html" class="dropbtn" onclick="toggleDropdown(event)">Community</a>
+                        <div class="dropdown-content">
+                            <a href="rules.html">Rules</a>
+                            <a href="join-our-team.html">Get Involved in the Community</a>
+                                </div>
+                    </li>
+        
+                    <!-- Account with dropdown -->
+                    <li class="dropdown">
+                        <a href="myaccount.html" class="dropbtn" onclick="toggleDropdown(event)">Account</a>
+                        <div class="dropdown-content">
+                            <a href="myaccount.html">Account</a>
+                            <a href="mylikes.html">My Likes</a>
+                            <a href="login.html">Login</a>
+                        </div>
+                    </li>
+        
+                    <!-- Help with dropdown -->
+                    <li class="dropdown">
+                        <a href="contact.html" class="dropbtn" onclick="toggleDropdown(event)">Help</a>
+                        <div class="dropdown-content">
+                            <a href="documentation.html">Documentation</a>
+                            <a href="updates.html">Updates & Features</a>
+                            <a href="contact.html">Contact</a>
+                        </div>
+                    </li>
+        
+                    <!-- Contribute Button -->
+                    <li>
+                        <a href="contribute.html" class="nav-btn">Contribute</a>
+                    </li>
+                </ul>     
+        
+                <!-- Search bar -->
+                <input type="text" id="search-bar" placeholder="Search characters..." class="search-bar">
+                <div id="login-status" class="login-status"></div>
+        
+                <!-- Hamburger menu for mobile view -->
+                <div class="hamburger" onclick="toggleMenu()">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </div>  
+            </div>
+        </nav>
+    <h1>Account Management</h1>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <div class="container">
+            <h1>User Login Status</h1>
+            <div id="user-status" class="user-status"></div> <!-- Element to display user login status -->
+        </div>
+
+        <br>
+        <div class="container">
+            <h2>Email Support</h2>
+            <p>If you need assistance with your account, please reach out to our support team:</p>
+            <p>Email: <a href="mailto:support@botbridge.net">support@botbridge.net</a></p>
+            <p>More account management features are coming soon!</p>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <p>© 2024 BotBridgeAI Character Hub. All rights reserved.</p>
+    </footer>
+</body>
+<script src="js/menu.js"></script>
+<script>
+    // Function to get a cookie by name
+function getCookie(name) {
+    const nameEQ = name + "=";
+    const ca = document.cookie.split(';'); // Split cookies into array
+    for (let i = 0; i < ca.length; i++) {
+        let c = ca[i];
+        while (c.charAt(0) === ' ') c = c.substring(1, c.length); // Trim space
+        if (c.indexOf(nameEQ) === 0) return c.substring(nameEQ.length, c.length); // Return cookie value
+    }
+    return null; // Return null if cookie not found
+}
+
+// Get the userID cookie value
+const userID = getCookie('userID');
+
+// Display logged in user message
+const userStatusDiv = document.getElementById('user-status');
+
+if (userID) {
+    userStatusDiv.classList.add('logged-in');
+    userStatusDiv.innerText = `User logged in: ${userID}`; // Display logged in message
+} else {
+    userStatusDiv.classList.add('logged-out');
+    userStatusDiv.innerText = 'No user logged in.'; // Display logged out message
+}
+</script>
+
+<script>
+    const socket = new WebSocket('wss://botbridge.net'); // Update with your domain
+
+    // Connection opened
+    socket.addEventListener('open', (event) => {
+        console.log('Connected to WebSocket server');
+    });
+
+    // Listen for messages
+    socket.addEventListener('message', (event) => {
+        console.log('Message from server:', event.data);
+        // Handle ping or any other messages from the server
+        if (event.data === 'ping') {
+            // You can respond to pings if needed
+            socket.send('pong'); // Example response
+        }
+    });
+
+    // Connection closed
+    socket.addEventListener('close', (event) => {
+        console.log('Disconnected from WebSocket server');
+    });
+</script>
+
+</html>

@@ -1,0 +1,23 @@
+#1d1f21 >> #1E2A38 /* Blue-grey background */
+#f5f5f5 >> #333 /* Text color in the body element */
+#fbbc04 >> #FFA500 /* Bright orange */
+#4285f4 >> #003366 /* Dark blue */
+#34a853 >> #003366 /* Hover green changed to dark blue */
+#fff >> #ffffff /* White */
+#3367d6 >> #003366 /* Hovered button background changed to dark blue */
+rgb(30, 50, 50) >> #f4f4f4 /* Light grey color for filters background */
+#2f3136 >> #ffffff /* Character card background changed to white */
+#28a745 >> #003366 /* Bright green changed to dark blue */
+#ff9800 >> #FFA500 /* Orange button color */
+#fb8c00 >> #FFA500 /* Darker orange on hover changed to bright orange */
+rgba(255, 140, 0, 0.2) >> #f4f4f4 /* Light orange background for tags */
+#ff8c00 >> #FFA500 /* Orange border changed to bright orange */
+#2f3136 >> #1E2A38 /* Dark background for overlay changed to blue-grey */
+#ffffff >> #ffffff /* Text color in overlay */
+#666 >> #333 /* Softer color for creator */
+#e68a00 >> #FFA500 /* Darker orange on button hover changed to bright orange */
+#888 >> #333 /* Tag text color */
+#34a853 >> #003366 /* View button background changed to dark blue */
+#fff >> #ffffff /* View button text color */
+#0f9d58 >> #003366 /* Hovered view/chat button background changed to dark blue */
+#4285f4 >> #003366 /* Upload button background changed to dark blue */

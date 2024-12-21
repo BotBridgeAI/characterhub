@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Character</title>
+    <link rel="stylesheet" href="css/menu2.0.css">
+    <style>
+        /* (Your existing CSS here) */
+    </style>
+</head>
+<body>
+    <!-- Header (same as before) -->
+    <header>
+        <nav class="navbar">
+            <div class="left-content">
+                <a href="/" class="logo"> <!-- Make the logo clickable -->
+                <div class="logo">
+                    <img src="logo.png" alt=" ">
+                </div>
+            </a>
+                        <a href="/" class="text">
+                <div class="text">
+                    <span class="letter letter-1">B</span>
+                    <span class="letter letter-2">O</span>
+                    <span class="letter letter-3">T</span>
+                    <span class="letter letter-4">B</span>
+                    <span class="letter letter-5">R</span>
+                    <span class="letter letter-6">I</span>
+                    <span class="letter letter-7">D</span>
+                    <span class="letter letter-8">G</span>
+                    <span class="letter letter-9">E</span>
+                    <span class="letter letter-10">.</span>
+                    <span class="letter letter-11">A</span>
+                    <span class="letter letter-12">I</span>
+                </div>
+            </a>
+            </div>
+    <div class="right-content">
+        <ul class="nav-links">
+            <!-- Characters with dropdown -->
+            <li class="dropdown">
+                <a href="index.html" class="dropbtn" onclick="toggleDropdown(event)">Characters</a>
+                <div class="dropdown-content">
+                    <a href="index.html">Characters Hub</a>
+                    <a href="editor.html">Upload Character</a>
+                    <a href="mycharacters.html">My Characters</a>
+                </div>
+            </li>
+    
+            <!-- Community with dropdown -->
+            <li class="dropdown">
+                <a href="rules.html" class="dropbtn" onclick="toggleDropdown(event)">Community</a>
+                <div class="dropdown-content">
+                    <a href="rules.html">Rules</a>
+                    <a href="join-our-team.html">Get Involved in the Community</a>
+                </div>
+            </li>
+    
+            <!-- Account with dropdown -->
+            <li class="dropdown">
+                <a href="myaccount.html" class="dropbtn" onclick="toggleDropdown(event)">Account</a>
+                <div class="dropdown-content">
+                    <a href="myaccount.html">Account</a>
+                    <a href="mylikes.html">My Likes</a>
+                    <a href="login.html">Login</a>
+                </div>
+            </li>
+    
+            <!-- Help with dropdown -->
+            <li class="dropdown">
+                <a href="contact.html" class="dropbtn" onclick="toggleDropdown(event)">Help</a>
+                <div class="dropdown-content">
+                    <a href="documentation.html">Documentation</a>
+                    <a href="updates.html">Updates & Features</a>
+                    <a href="contact.html">Contact</a>
+                </div>
+            </li>
+    
+            <!-- Contribute Button -->
+            <li>
+                <a href="contribute.html" class="nav-btn">Contribute</a>
+            </li>
+        </ul>     
+    
+        <div id="login-status" class="login-status"></div>
+    
+        <!-- Hamburger menu for mobile view -->
+        <div class="hamburger" onclick="toggleMenu()">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+        </div>  
+    </div>
+    </nav>
+    </header>
+
+    <!-- Main Content -->
+    <div class="container">
+        <h1>Edit Character</h1>
+        <div class="error" id="errorMessage"></div>
+
+        <form id="characterForm">
+            <label for="name">Character Name:</label>
+            <input type="text" id="name" class="name-input" placeholder="Enter character name" required maxlength="64">
+            <label for="status">Character Status:</label>
+            <select id="status">
+                <option value="pending">Pending</option>
+                <option value="approved">Approved</option>
+            </select>
+            <label for="tags">Tags (comma-separated):</label>
+            <input type="text" id="tags" placeholder="Enter tags" required>
+            <label for="persona">Persona:</label>
+            <textarea id="persona" rows="4" placeholder="Enter character persona" required></textarea>
+            <label for="scenario">Scenario:</label>
+            <textarea id="scenario" rows="4" placeholder="Enter scenario"></textarea>
+            <label for="greeting">Greeting:</label>
+            <textarea id="greeting" rows="4" placeholder="Enter the first message" required></textarea>
+            <button type="submit">Save Changes</button>
+        </form>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="js/menu.js"></script>
+    <script>
+        // Retrieve character data from localStorage or URL parameters
+        const characterId = localStorage.getItem('currentCharacterId');
+        const errorMessage = document.getElementById('errorMessage');
+
+        if (characterId) {
+            // Fetch character data using the ID
+            axios.get(`https://characters.botbridge.net/api/characters/${characterId}`)
+                .then(response => {
+                    const character = response.data;
+                    document.getElementById('name').value = character.name;
+                    document.getElementById('status').value = character.status;
+                    document.getElementById('tags').value = character.tags.join(', ');
+                    document.getElementById('persona').value = character.persona;
+                    document.getElementById('scenario').value = character.scenario || '';
+                    document.getElementById('greeting').value = character.greeting;
+                })
+                .catch(error => {
+                    errorMessage.textContent = 'Error loading character data.';
+                });
+        } else {
+            errorMessage.textContent = 'No character selected for editing.';
+        }
+
+        // Handle form submission to save changes
+        document.getElementById('characterForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            const updatedCharacter = {
+                name: document.getElementById('name').value,
+                status: document.getElementById('status').value,
+                tags: document.getElementById('tags').value.split(',').map(tag => tag.trim()),
+                persona: document.getElementById('persona').value,
+                scenario: document.getElementById('scenario').value,
+                greeting: document.getElementById('greeting').value,
+            };
+
+            axios.put(`https://characters.botbridge.net/api/characters/${characterId}`, updatedCharacter)
+                .then(response => {
+                    alert('Character updated successfully!');
+                    // Optionally, redirect or reset the form
+                })
+                .catch(error => {
+                    errorMessage.textContent = 'Error updating character.';
+                });
+        });
+    </script>
+    
+    <script>
+        const socket = new WebSocket('wss://botbridge.net'); // Update with your domain
+    
+        // Connection opened
+        socket.addEventListener('open', (event) => {
+            console.log('Connected to WebSocket server');
+        });
+    
+        // Listen for messages
+        socket.addEventListener('message', (event) => {
+            console.log('Message from server:', event.data);
+            // Handle ping or any other messages from the server
+            if (event.data === 'ping') {
+                // You can respond to pings if needed
+                socket.send('pong'); // Example response
+            }
+        });
+    
+        // Connection closed
+        socket.addEventListener('close', (event) => {
+            console.log('Disconnected from WebSocket server');
+        });
+    </script>
+    
+</body>
+</html>

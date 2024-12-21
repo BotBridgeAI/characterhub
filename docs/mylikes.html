@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BOTBRIDGE.AI Character Hub</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/menu2.0.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <nav class="navbar">
+            <div class="left-content">
+                <a href="/" class="logo"> <!-- Make the logo clickable -->
+                <div class="logo">
+                    <img src="logo.png" alt=" ">
+                </div>
+            </a>
+                        <a href="/" class="text">
+                <div class="text">
+                    <span class="letter letter-1">B</span>
+                    <span class="letter letter-2">O</span>
+                    <span class="letter letter-3">T</span>
+                    <span class="letter letter-4">B</span>
+                    <span class="letter letter-5">R</span>
+                    <span class="letter letter-6">I</span>
+                    <span class="letter letter-7">D</span>
+                    <span class="letter letter-8">G</span>
+                    <span class="letter letter-9">E</span>
+                    <span class="letter letter-10">.</span>
+                    <span class="letter letter-11">A</span>
+                    <span class="letter letter-12">I</span>
+                </div>
+            </a>
+            </div>
+    <div class="right-content">
+        <ul class="nav-links">
+            <!-- Characters with dropdown -->
+            <li class="dropdown">
+                <a href="index.html" class="dropbtn" onclick="toggleDropdown(event)">Characters</a>
+                <div class="dropdown-content">
+                    <a href="index.html">Characters Hub</a>
+                    <a href="editor.html">Upload Character</a>
+                    <a href="mycharacters.html">My Characters</a>
+                </div>
+            </li>
+    
+            <!-- Community with dropdown -->
+            <li class="dropdown">
+                <a href="rules.html" class="dropbtn" onclick="toggleDropdown(event)">Community</a>
+                <div class="dropdown-content">
+                    <a href="rules.html">Rules</a>
+                    <a href="join-our-team.html">Get Involved in the Community</a>
+                </div>
+            </li>
+    
+            <!-- Account with dropdown -->
+            <li class="dropdown">
+                <a href="myaccount.html" class="dropbtn" onclick="toggleDropdown(event)">Account</a>
+                <div class="dropdown-content">
+                    <a href="myaccount.html">Account</a>
+                    <a href="mylikes.html">My Likes</a>
+                    <a href="login.html">Login</a>
+                </div>
+            </li>
+    
+            <!-- Help with dropdown -->
+            <li class="dropdown">
+                <a href="contact.html" class="dropbtn" onclick="toggleDropdown(event)">Help</a>
+                <div class="dropdown-content">
+                    <a href="documentation.html">Documentation</a>
+                    <a href="updates.html">Updates & Features</a>
+                    <a href="contact.html">Contact</a>
+                </div>
+            </li>
+    
+            <!-- Contribute Button -->
+            <li>
+                <a href="contribute.html" class="nav-btn">Contribute</a>
+            </li>
+        </ul>     
+    
+        <div id="login-status" class="login-status"></div>
+    
+        <!-- Hamburger menu for mobile view -->
+        <div class="hamburger" onclick="toggleMenu()">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+        </div>  
+    </div>
+    </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+
+            <h1>Unleash Your Fantasies with BOTBRIDGE.AI!</h1>
+            <p>Dive into a world where your wildest, grossest desires come to life! Discover and create unique AI characters designed to cater to your most niche interests. Share your creations, connect with like-minded enthusiasts, and indulge in a space where everything is celebrated. Join us for a playful exploration of the unusual and the taboo—because your fantasies deserve a voice!</p>
+            <button class="cta-btn">Get Started</button>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main>
+  <!-- Sidebar with Filters -->
+
+    <div class="filters">
+        <h2>Filters</h2>
+        <ul>
+            <!-- More Filters -->
+        </ul>
+    </div>
+
+
+        <!-- Character Grid -->
+        <section id="characters">
+            <h2>Explore Characters</h2>
+            <div class="character-grid" id="character-grid">
+                <!-- Character Cards will be populated here -->
+                <div class="character-card">
+                    <div class="card-header">
+                        <h3>Character Name</h3>
+                    </div>
+                    <div class="card-body">
+                        <p>Some description about the character...</p>
+                        <p class="tags">Tags: Smart, Playful</p>
+                        <button class="view-btn">View Character</button>
+                    </div>
+                </div>
+                <!-- Repeat Cards for more characters -->
+            </div>
+            <!-- Upload Character Button -->
+            <button class="upload-btn">Upload New Character</button>
+        </section>
+
+        <!-- AI Recommendations Section -->
+        <section id="recommendations">
+            <h2>Recommended for You</h2>
+            <div class="recommendation-grid">
+                <!-- Recommended Character Cards -->
+                <div class="recommendation-card">
+                    <div class="card-header">
+                        <h3>Recommended Name</h3>
+                    </div>
+                    <div class="card-body">
+                        <p>Short description of the recommended character...</p>
+                        <button class="chat-btn">Chat Now</button>
+                    </div>
+                </div>
+                <!-- Recommendations will be populated dynamically -->
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <p>© 2024 BotBridgeAI Character Hub. All rights reserved.</p>
+        <ul>
+            <li><a href="#">Terms of Service</a></li>
+            <li><a href="#">Privacy Policy</a></li>
+            <li><a href="rules.html">Rules</a></li>
+            <li><a href="admin.html">Admin</a></li>
+        </ul>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="js/mylikes.js"></script>
+    <script src="js/menu.js"></script>
+    <script>
+        const socket = new WebSocket('wss://botbridge.net'); // Update with your domain
+    
+        // Connection opened
+        socket.addEventListener('open', (event) => {
+            console.log('Connected to WebSocket server');
+        });
+    
+        // Listen for messages
+        socket.addEventListener('message', (event) => {
+            console.log('Message from server:', event.data);
+            // Handle ping or any other messages from the server
+            if (event.data === 'ping') {
+                // You can respond to pings if needed
+                socket.send('pong'); // Example response
+            }
+        });
+    
+        // Connection closed
+        socket.addEventListener('close', (event) => {
+            console.log('Disconnected from WebSocket server');
+        });
+    </script>
+    
+</body>
+</html>
